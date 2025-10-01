@@ -14,11 +14,10 @@ Antes de iniciar cualquier actualización, es fundamental saber qué versión de
 uname -r
 ```
 
-- **¿Por qué?** Permite comparar antes y después de la actualización. Documenta la salida con una captura de pantalla:
+**Salida esperada:** Versión del kernel actual (ej: `5.15.0-312.187.5.3.el8uek.x86_64`)
 
-```markdown
-![Versión actual del Kernel](./img/uname-r_comando.png)
-```
+![Versión actual del Kernel](img/uname-r_comando.png)
+*Versión actual del kernel en ejecución*
 
 ---
 
@@ -31,12 +30,10 @@ ping -c 4 www.google.com
 sudo dnf repolist
 ```
 
-Documenta la salida de ambos comandos con capturas de pantalla:
+**Captura de pantalla:**
 
-```markdown
-![Conectividad a internet](./img/ping-google_comando.png)
-![Repositorios configurados](./img/dnf-repolist_comando.png)
-```
+![Repositorios configurados](img/dnf-repolist_comando.png)
+*Repositorios DNF configurados y habilitados*
 
 ---
 
@@ -46,11 +43,10 @@ Documenta la salida de ambos comandos con capturas de pantalla:
 sudo dnf check-update kernel
 ```
 
-Documenta la salida con una captura de pantalla:
+**Captura de pantalla:**
 
-```markdown
-![Actualización disponible del kernel](./img/dnf-check-update-kernel_comando.png)
-```
+![Actualización disponible del kernel](img/dnf-check-update-kernel_comando.png)
+*Verificación de actualizaciones disponibles del kernel*
 
 ---
 
@@ -62,13 +58,16 @@ sudo dnf groupinstall "Development Tools" -y
 sudo dnf install ncurses-devel bison flex elfutils-libelf-devel openssl-devel gcc make wget bc perl -y
 ```
 
-- **¿Por qué?** Actualiza todos los paquetes y prepara el entorno con las herramientas necesarias para compilar el kernel. Documenta la salida con capturas de pantalla:
+**Capturas de pantalla del proceso:**
 
-```markdown
-![Actualización del sistema](./img/dnf-update_comando.png)
-![Instalación de herramientas de desarrollo 01](./img/devtools-install_comando_01.png)
-![Instalación de herramientas de desarrollo 02](./img/devtools-install_comando_02.png)
-```
+![Actualización del sistema](img/dnf-update_comando.png)
+*Actualización de todos los paquetes del sistema*
+
+![Instalación de herramientas de desarrollo 01](img/devtools-install_comando_01.png)
+*Instalación de Development Tools - Parte 1*
+
+![Instalación de herramientas de desarrollo 02](img/devtools-install_comando_02.png)
+*Instalación de Development Tools - Parte 2*
 
 ---
 
@@ -80,13 +79,16 @@ tar -xvf linux-6.1.tar.xz
 cd linux-6.1
 ```
 
-Documenta la descarga y extracción con capturas:
+**Capturas de pantalla del proceso:**
 
-```markdown
-![Descarga del kernel](./img/wget-kernel_comando.png)
-![Extracción del kernel](./img/tar-kernel_comando.png)
-![Cambio de carpeta Linux 6.1](./img/cd-linux-6.1_comando.png)
-```
+![Descarga del kernel](img/wget-kernel_comando.png)
+*Descarga del código fuente del kernel 6.1 desde kernel.org*
+
+![Extracción del kernel](img/tar-kernel_comando.png)
+*Extracción del archivo comprimido del kernel*
+
+![Cambio de carpeta Linux 6.1](img/cd-linux-6.1_comando.png)
+*Acceso al directorio del código fuente*
 
 ---
 
@@ -145,11 +147,19 @@ Documenta la descarga y extracción con capturas:
 7. **Documenta el proceso:**
    - Toma capturas de pantalla de los pasos clave y guárdalas en la carpeta `img` para tu informe.
 
-```markdown
-![Configuración del kernel 01](./img/menuconfig_01.png)
-![Configuración del kernel 02](./img/menuconfig_02.png)
-![Configuración del kernel 03](./img/menuconfig_03.png)
-```
+**Capturas de pantalla del menú de configuración:**
+
+![Configuración del kernel 01](img/menuconfig_01.png)
+*Pantalla principal del menú de configuración (menuconfig)*
+
+![Configuración del kernel 02](img/menuconfig_02.png)
+*Navegación por opciones específicas de configuración*
+
+![Configuración del kernel 03](img/menuconfig_03.png)
+*Configuración de módulos y drivers del kernel*
+
+### Recomendaciones de configuración en menuconfig
+
 Para el menú de configuración se siguieron las siguientes recomendaciones:
 
 1. **Drivers de hardware (VirtualBox)**<br>
@@ -283,11 +293,14 @@ Esto ocurre porque la herramienta `pahole` no está disponible en los repositori
 
 Documenta todos los pasos de la compilación e instalación:
 
-```markdown
-![Compilación del kernel](./img/make-kernel_comando.png)
-![Instalación de módulos](./img/modules-install_comando.png)
-![Instalación del kernel](./img/make-install_comando.png)
-```
+![Compilación del kernel](img/make-kernel_comando.png)
+*Proceso de compilación del kernel con make*
+
+![Instalación de módulos](img/modules-install_comando.png)
+*Instalación de módulos del kernel*
+
+![Instalación del kernel](img/make-install_comando.png)
+*Instalación final del kernel en /boot*
 
 ---
 
@@ -311,7 +324,7 @@ sudo make modules_install
 sudo make install
 ```
 
-### 8.2. Actualizar la configuración de GRUB
+### 8.2. Actualizar GRUB
 
 Una vez confirmado que los archivos del kernel están en `/boot/`, actualiza GRUB:
 
@@ -319,15 +332,9 @@ Una vez confirmado que los archivos del kernel están en `/boot/`, actualiza GRU
 sudo grub2-mkconfig -o /boot/grub2/grub.cfg
 ```
 
-### 8.3. Verificar que GRUB detectó el nuevo kernel
+**Salida esperada:** GRUB detectará automáticamente el nuevo kernel 6.1 y lo añadirá al menú de arranque.
 
-```bash
-cat /boot/grub2/grub.cfg | grep "menuentry.*6.1"
-```
-
-**Debes ver:** Una línea que incluya "6.1" en el título del menuentry.
-
-### 8.4. Reiniciar el sistema
+### 8.3. Reiniciar el sistema
 
 ```bash
 sudo reboot
@@ -335,16 +342,13 @@ sudo reboot
 
 **⚠️ Importante:** Durante el reinicio, puede aparecer una pantalla negra con mensajes de VirtualBox (como "VBOX CD-ROM" o "PXE-E06"). Esto es normal. Espera unos segundos y aparecerá el menú de GRUB mostrando el nuevo kernel 6.1.
 
----
+**Capturas de pantalla:**
 
-Documenta todo el proceso de verificación y actualización de GRUB:
+![Actualización de GRUB](img/grub-update_comando.png)
+*Actualización del gestor de arranque GRUB*
 
-```markdown
-![Verificación de archivos en /boot](./img/verificacion-boot_comando.png)
-![Actualización de GRUB](./img/grub-update_comando.png)
-![Verificación de GRUB](./img/grub-verify_comando.png)
-![Reinicio tras compilación](./img/reboot-kernel61_comando.png)
-```
+![Reinicio tras compilación](img/reboot-kernel61_comando.png)
+*Reinicio del sistema para cargar kernel 6.1*
 
 ---
 
@@ -354,55 +358,37 @@ Documenta todo el proceso de verificación y actualización de GRUB:
 uname -r
 ```
 
-Debes ver una versión similar a `6.1.x`. Documenta la salida:
+**Salida esperada:** `6.1.0` o versión similar
 
-```markdown
-![Kernel 6.1 activo](./img/uname-r-kernel61_comando.png)
-```
+![Kernel 6.1 activo](img/uname-r-kernel61_comando.png)
+*Verificación del kernel 6.1 activo después del reinicio*
 
 ---
 
 ## 10. Ejemplo de estructura de carpetas para la entrega
 
 ```
-Semana 9/
-└── TrabajoKernel/
-    ├── Paso_a_Paso_Actualizacion_Kernel.md
-    ├── Explicacion_Comandos_Kernel.md
-    └── img/
-        ├── uname-r_comando.png
-        ├── ping-google_comando.png
-        ├── dnf-repolist_comando.png
-        ├── dnf-check-update-kernel_comando.png
-        ├── dnf-update_comando.png
-        ├── devtools-install_comando_01.png
-        ├── devtools-install_comando_02.png
-        ├── wget-kernel_comando.png
-        ├── tar-kernel_comando.png
-        ├── cd-linux-6.1_comando.png
-        ├── menuconfig_01.png
-        ├── menuconfig_02.png
-        ├── menuconfig_03.png
-        ├── make-kernel_comando.png
-        ├── modules-install_comando.png
-        ├── make-install_comando.png
-        ├── verificacion-boot_comando.png
-        ├── grub-update_comando.png
-        ├── grub-verify_comando.png
-        ├── reboot-kernel61_comando.png
-        └── uname-r-kernel61_comando.png
+Trabajo_Kernel/
+├── Paso_a_Paso_Actualizacion_Kernel.md
+├── Explicacion_Comandos_Kernel.md
+├── README.md
+└── img/
+    ├── uname-r_comando.png
+    ├── dnf-repolist_comando.png
+    ├── dnf-check-update-kernel_comando.png
+    ├── dnf-update_comando.png
+    ├── devtools-install_comando_01.png
+    ├── devtools-install_comando_02.png
+    ├── wget-kernel_comando.png
+    ├── tar-kernel_comando.png
+    ├── cd-linux-6.1_comando.png
+    ├── menuconfig_01.png
+    ├── menuconfig_02.png
+    ├── menuconfig_03.png
+    ├── make-kernel_comando.png
+    ├── modules-install_comando.png
+    ├── make-install_comando.png
+    ├── grub-update_comando.png
+    ├── reboot-kernel61_comando.png
+    └── uname-r-kernel61_comando.png
 ```
-
----
-
-## Recomendaciones finales
-
-1. **Respaldo:** Antes de reiniciar, asegúrate de tener un snapshot de la VM en VirtualBox.
-2. **Documentación:** Captura todas las pantallas mencionadas para tu informe.
-3. **Troubleshooting:** Si el sistema no arranca con el kernel 6.1, selecciona el kernel 5.15 en el menú de GRUB.
-4. **Guest Additions:** Después de verificar que el kernel 6.1 funciona, reinstala las Guest Additions de VirtualBox para recuperar funcionalidades como carpetas compartidas y portapapeles compartido.
-5. **Logs:** Para depurar problemas, consulta `/var/log/messages` y ejecuta `dmesg`.
-
----
-
-**Fin del documento**

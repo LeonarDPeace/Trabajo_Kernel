@@ -157,11 +157,7 @@ make: *** [Makefile:1236: vmlinux] Error 2
 **`sudo grub2-mkconfig -o /boot/grub2/grub.cfg`**
 - **¿Qué hace?**: Regenera el archivo de configuración de GRUB para incluir el nuevo kernel.
 - **¿Por qué se usa?**: Sin actualizar GRUB, el menú de arranque no mostrará el kernel 6.1.
-- **Detalles técnicos**: GRUB2 escanea `/boot/` y genera entradas para cada kernel encontrado.
-
-**`cat /boot/grub2/grub.cfg | grep "menuentry.*6.1"`**
-- **¿Qué hace?**: Verifica que GRUB detectó correctamente el kernel 6.1.
-- **¿Por qué se usa?**: Confirmación visual de que el kernel estará disponible en el menú de arranque.
+- **Detalles técnicos**: GRUB2 escanea `/boot/` y genera entradas automáticamente para cada kernel encontrado.
 
 ### 9.3. Reinicio del sistema
 
