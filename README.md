@@ -82,7 +82,7 @@ Este proyecto documenta las soluciones a los siguientes errores reales encontrad
 
 El directorio `img/` contiene capturas de pantalla de cada paso crítico del proceso, facilitando la replicación exacta del procedimiento.
 
-## 👨‍🎓 Autor
+## Autor
 
 **Eduard Criollo Yule**  
 Código: 2220335  
