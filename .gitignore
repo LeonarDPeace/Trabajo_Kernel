@@ -1,0 +1,27 @@
+# Sistema Operativo
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Editores
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Backups
+*.bak
+*.backup
+~$*.docx
+~$*.doc
+
+# Archivos temporales de Office
+*.tmp
+
+# Logs
+*.log
+
+# Archivos de Word temporales
+~$*
